@@ -1,0 +1,8 @@
+composer install
+set env
+php artisan migrate
+php artisan db:seed --class=AdminSeeder
+
+in Docker container laravel_node
+npm install
+npm run dev

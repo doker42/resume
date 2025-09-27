@@ -14,14 +14,15 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        $adminUser = User::where([
-            'email' => 'admin@mail.com',
-        ])->first();
+        $adminUser = User::all()->first();
+
         if (!$adminUser) {
             User::create([
                 'name'  => 'Admin',
-                'email' => 'admin@mail.com',
-                'password' => Hash::make('admin123'),
+                'email' => env('ADMIN_DEFAULT_EMAIL') ?? 'admin@mail.com',
+                'password' => env('ADMIN_DEFAULT_PASSWORD')
+                    ? Hash::make(env('ADMIN_DEFAULT_PASSWORD'))
+                    : Hash::make('secret'),
             ]);
         }
     }
